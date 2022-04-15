@@ -106,7 +106,6 @@ var app = new Vue({
         loadPFiles: function(){
             var self = this;
             spoo.io().Objects({type: "puzzle_file"}).get((data, err) => {
-                alert(data)
                 self.pfiles = data;
             })
         },
@@ -121,6 +120,14 @@ var app = new Vue({
                 }
             }).add()
         },
+        setContent: function(content){
+            this.content = content;
+            bus.$emit('set-content', content);
+        },
+
+
+
+
         generateRunner: function(script) {
             var b64 = btoa(script);
             this.output = "Run in Runner: \n\nhttps://puzzlelang.github.io/puzzle-web/runner?base64=" + b64 + "\n\nRun as packaged cli: \n\nhttps://puzzlelang.github.io/puzzle-web?base64=" + b64;
@@ -539,6 +546,7 @@ var app = new Vue({
         },
         currentApp: function(app){
             var self = this;
+            spoo = new SPOO_Client(localStorage['clientId']).AppId(app.name);
             self.loadPFiles(app)
         },
         /*sideBarShown: function(val){
@@ -570,7 +578,6 @@ var app = new Vue({
                         }
                     }]
                 })
-
 
                 /*self.staticContext.push({
                     //bgColor: '#3e2d46',
@@ -701,7 +708,6 @@ var app = new Vue({
             }
 
 
-
             var editor = ace.edit("editor");
             editor.setTheme("ace/theme/monokai");
             editor.session.setMode("ace/mode/javascript");
@@ -721,7 +727,7 @@ var app = new Vue({
             });
 
             bus.$on('set-content', function(k) {
-                console.log(editor.session, k)
+                console.log(editor.session, k, 'sdgsdg')
                 editor.getSession().setValue(k)
             })
 

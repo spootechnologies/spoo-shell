@@ -31,21 +31,21 @@
         
         <div class="leto-width-fifth leto-p-sm" v-if="authenticated">
             
-            <div v-if="currentApp" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="currentApp = null">{{currentApp.name}}</div>
+            <div v-if="currentApp" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="currentApp = null">{{currentApp.name}}&nbsp; <span class="fa fa-caret-down"></span> </div>
 
             <div v-if="!currentApp" v-for="app in applications" v-on:click="currentApp = app" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">{{app.name}}</div>
 
             <br>
 
             <span v-if="currentApp">
-                <div v-for="file in pfiles" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">{{file.name}}</div>
+                <div v-for="file in pfiles" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="setContent('sgsgd')">{{file.name}}</div>
                 <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="addPFile()">+</div>
             </span>
 
         </div>
 
-        <div class="leto-width-four-fifths leto-p-sm" v-if="authenticated">
-            main
+        <div class="leto-width-four-fifths leto-p-sm">
+            <div id="editor" class="leto-mt-sm"></div>
         </div>
 
         <div class="leto-width-four-fifths leto-p-sm" v-if="!authenticated">
