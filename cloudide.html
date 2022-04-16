@@ -33,21 +33,57 @@
             
             <div v-if="currentApp" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="currentApp = null">{{currentApp.name}}&nbsp; <span class="fa fa-caret-down"></span> </div>
 
-            <div v-if="!currentApp" v-for="app in applications" v-on:click="currentApp = app" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">{{app.name}}</div>
+            <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="currentFile=null;setContent('')" > <span class="fa fa-terminal"></span> &nbsp;shell</div>
+
+            <div class="leto-block" v-for="app in applications">
+                <div v-if="!currentApp" v-on:click="currentApp = app" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">{{app.name}}</div>
+            </div>
 
             <br>
 
             <span v-if="currentApp">
-                <div v-for="file in pfiles" class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="setContent('sgsgd')">{{file.name}}</div>
+                <div class="leto-block leto-text-xs leto-text-white leto-m-xs"><b>ACTIONS</b></div>
+                <div class="leto-block" v-for="file in pfiles">
+                    <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="currentFile=file;setContent(file.properties.content.value)">{{file.name}}</div>
+                </div>
                 <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="addPFile()">+</div>
+
+                <br><br>
+
+                <div class="leto-block leto-text-xs leto-text-white leto-m-xs"><b>VISUALS</b></div>
+                <div class="leto-block" v-for="file in pfiles">
+                    <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="currentFile=file;setContent(file.properties.content.value)">{{file.name}}</div>
+                </div>
+                <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm" v-on:click="addPFile()">+</div>
+
+                <br><br>
+
+                <div class="leto-block leto-text-xs leto-text-white leto-m-xs"><b>OBJECTS</b></div>
+                <div class="leto-block">
+                    <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">Templates</div>
+                </div>
+                <div class="leto-block">
+                    <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">Objects</div>
+                </div>
+                <div class="leto-block">
+                    <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">Users</div>
+                </div>
+                <div class="leto-block">
+                    <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm">Logs</div>
+                </div>
+               
             </span>
 
         </div>
 
         <div class="leto-width-four-fifths leto-p-sm">
+
             <div id="editor" class="leto-mt-sm"></div>
+
         </div>
 
+        <div class="leto-text-dark-grey leto-bubble-xs leto-click leto-group leto-vertical-center leto-horizontal-center leto-mh-none" v-on:click="saveFile()"><i class="fa fa-save"></i></div>
+        
         <div class="leto-width-four-fifths leto-p-sm" v-if="!authenticated">
             LOGIN
             <br>

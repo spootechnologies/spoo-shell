@@ -43,6 +43,7 @@ var app = new Vue({
         spoo:spoo,
         applications: [],
         currentApp: null,
+        currentFile: {},
         pfiles: [],
 
 
@@ -114,15 +115,24 @@ var app = new Vue({
             spoo.io().Object({
                 type: "puzzle_file",
                 name: name,
-                action: {
-                    type: "action",
-                    value: "..."
+                properties: {
+                    content: {
+                        type: "action",
+                        value: "..."
+                    }
                 }
             }).add()
         },
         setContent: function(content){
             this.content = content;
             bus.$emit('set-content', content);
+        },
+        saveFile: function(){
+            var self = this;
+
+            spoo.io().Object(self.currentFile._id).setPropertyValue('content', self.content).save((data, err) => {
+                if(err) return alert("Error saving");
+            })
         },
 
 
