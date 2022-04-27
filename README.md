@@ -1,3 +1,3 @@
-# LX
+# SPOO Shell
 
-LX is an interactive browser-based runtime for luke scipts.
+Interact with your SPOO objects and apps via the web-based shell
