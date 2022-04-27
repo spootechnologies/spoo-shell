@@ -69,7 +69,7 @@
 
         </div>
 
-        <div class="leto-width-four-fifths leto-p-sm">
+        <div class="leto-width-four-fifths leto-p-sm" v-show="authenticated">
 
             
             <div id="editor" class="leto-mt-sm"></div>
@@ -94,7 +94,6 @@
             <input type="password" class="leto-input-sm" v-model="loginData.password" placeholder="*******">
             <br>
             <div class="leto-button-xs" v-on:click="login()">Login</div>
-            {{loginData}}d
         </div>
 
     </div>
