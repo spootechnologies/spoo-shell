@@ -823,6 +823,7 @@ var puzzle = {
 
     // Returns the raw statement from an input. e.g. (print hello) will return print hello
     getRawStatement: function(statement) {
+
         if (this.groupingOperators.includes(statement.charAt(0)) && this.groupingOperators.includes(statement.charAt(statement.length - 1))) {
             return statement.substring(1, statement.length - 1)
         } else return statement;

@@ -97,7 +97,7 @@ html {
 }
 
 #editor {
-    min-height: 30px !important;
+    min-height: 40px !important;
     //width: calc(100% - 120px);
 }
 
