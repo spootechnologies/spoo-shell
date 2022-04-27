@@ -98,6 +98,7 @@ html {
 
 #editor {
     min-height: 40px !important;
+    border-radius: 5px;
     //width: calc(100% - 120px);
 }
 
