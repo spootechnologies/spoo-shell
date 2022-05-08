@@ -60,6 +60,14 @@
 
             <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="runCode(content)"> <span class="fa fa-play"></span></div>
 
+            <span v-if="!openedObject._id">
+                <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="setAndRun('get Objects')">get Objects</div>
+                <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="setAndRun('get Templates')">get Templates</div>
+                <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="setAndRun('get Users')">get Users</div>
+                <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="setAndRun('get Files')">get Files</div>
+                <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="setAndRun('get EventLogs')">get EventLogs</div>
+            </span>
+
             <br>
 
             <div v-show="openedObject._id" class="leto-badge leto-text-white leto-click" v-on:click="setOpenedObject({})">clear</div>
