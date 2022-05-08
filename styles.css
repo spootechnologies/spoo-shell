@@ -237,6 +237,11 @@ html {
     height: 100%;
     width: 100%;
     background: #202020; //#efefef;
+
+}
+
+#output {
+    display: contents;
 }
 
 .bottom-sheet {

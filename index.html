@@ -74,26 +74,30 @@
             
             <div id="editor" class="leto-mt-sm"></div>
 
-            <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="setContent('')"> <span class="fa fa-eraser"></span></div>
+            <!--div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="setContent('')"> <span class="fa fa-eraser"></span></div-->
 
             <div class="leto-button-xs leto-bg-black leto-border-none leto-text-white leto-text-sm leto-mv" style="background: #111111" v-on:click="runCode(content)"> <span class="fa fa-play"></span></div>
 
             <br>
 
+            <div v-show="openedObject._id" class="leto-badge leto-text-white leto-click" v-on:click="setOpenedObject({})">clear</div>
+            <pre v-show="openedObject._id" style="color:#FFFFFF">{{openedObject}}</pre>
+
             <pre class="" id="output">out</pre>
         </div>
 
-    
-        <div class="leto-width-four-fifths leto-p-sm" v-if="!authenticated">
-            LOGIN
-            <br>
-            <input type="text" class="leto-input-sm" v-model="loginData.workspace" placeholder="workspace">
-            <br>
-            <input type="text" class="leto-input-sm" v-model="loginData.username" placeholder="username">
-            <br>
-            <input type="password" class="leto-input-sm" v-model="loginData.password" placeholder="*******">
-            <br>
-            <div class="leto-button-xs" v-on:click="login()">Login</div>
+        <div class="leto-width-full leto-horizontal-center leto-vertcal-center leto-group leto-p-sm" v-if="!authenticated">
+            <div>
+                <span class="leto-text-xl leto-text-white leto-m">LOGIN</span>
+                <br>
+                <input type="text" class="leto-input-sm" v-model="loginData.workspace" placeholder="workspace">
+                <br>
+                <input type="text" class="leto-input-sm" v-model="loginData.username" placeholder="username">
+                <br>
+                <input type="password" class="leto-input-sm" v-model="loginData.password" placeholder="*******">
+                <br>
+                <div class="leto-button-xs leto-text-white leto-border-white" v-on:click="login()">Login</div>
+            </div>
         </div>
 
     </div>

@@ -7,6 +7,13 @@ var isObject = (a) => {
     return (!!a) && (a.constructor === Object);
 };
 
+Object.defineProperty(String.prototype, 'capitalize', {
+  value: function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  },
+  enumerable: false
+});
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');
@@ -30,6 +37,10 @@ window.puzzle.output = function() {
 
 
     bus.$emit('puzzle-response', args.join(" "))
+}
+
+function openObject(data, role){
+    bus.$emit('open-object', {_id: data, role: role});
 }
 
 var syntax = {
@@ -58,7 +69,13 @@ var syntax = {
                         spoo.io()[ctx.family](body).get(function(data, err) {
                             if (err) console.error(err)
                             else {
-                                output.innerText = JSON.stringify(data, false, 3)
+                                var _output = "";
+                                data.forEach(d => {
+                                    var sO = JSON.stringify(d);
+                                    _output += "<span onclick='openObject(\""+d._id+"\", \""+d.role+"\")' class='leto-bubble object-bubble leto-m-md'><span style='padding:1px 5px; background:#bbbbbb;color:#000000; border-radius:100px'>"+d.name+"</span></span>"
+                                })
+                                console.log(_output)
+                                output.innerHTML = _output//JSON.stringify(data, false, 3)
                                 done();
                             }
                         })
@@ -184,6 +201,7 @@ var emojis = [
 var app = new Vue({
     el: '#app',
     data: {
+        openedObject: {},
         spoo:spoo,
         applications: [],
         currentApp: null,
@@ -234,6 +252,16 @@ var app = new Vue({
         ]
     },
     methods: {
+        setOpenedObject: function(data){
+            Vue.set(this, 'openedObject', data)
+        },
+        openObject: function(data){
+            var self = this;
+            spoo.io()[data.role.capitalize()](data._id).get((data,err) => {
+                self.openedObject = data;
+            })
+            
+        },
         setAndRun: function(c) {
             this.setContent(c)
             this.runCode(c)
@@ -940,6 +968,9 @@ var app = new Vue({
             }
         }, false);
 
+        bus.$on('open-object', function(data) {
+            self.openObject(data)
+        })
 
         bus.$on('useFile', function(file) {
             self.openedFile = file.project + '/' + file.name;
